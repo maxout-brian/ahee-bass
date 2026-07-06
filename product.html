@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AHEE — Magic Ableton Racks Vol 6</title>
+<meta name="description" content="AHEE's Magic Ableton Racks Vol 6 — 30 racks and 300 macro presets for Ableton Live. Standard and Deluxe editions.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#0a0a0d; --surface:#141419; --surface2:#1c1c24; --line:#2a2a34;
+    --text:#f5f5f7; --muted:#8f8f9c; --violet:#b026ff; --glow:#c94dff;
+    --violet-soft:rgba(176,38,255,.14);
+    --display:'Anton',sans-serif; --body:'Space Grotesk',system-ui,sans-serif;
+    --maxw:1200px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{background:var(--ink);color:var(--text);font-family:var(--body);
+    line-height:1.55;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+  a{color:inherit;text-decoration:none}
+  button{font-family:var(--body);cursor:pointer}
+  :focus-visible{outline:2px solid var(--glow);outline-offset:3px}
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 24px}
+
+  /* header */
+  header{position:sticky;top:0;z-index:50;background:rgba(10,10,13,.82);
+    backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+  .nav{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;
+    height:70px;max-width:var(--maxw);margin:0 auto;padding:0 24px}
+  .nav-links{display:flex;gap:26px;font-size:13px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase}
+  .nav-links a{color:var(--muted);transition:.18s}
+  .nav-links a:hover,.nav-links a.current{color:var(--text)}
+  .brand{font-family:var(--display);font-size:30px;letter-spacing:2px;text-align:center;
+    font-style:italic;transform:skewX(-8deg)}
+  .nav-actions{display:flex;gap:12px;justify-content:flex-end;align-items:center}
+  .pill{font-size:12px;font-weight:700;letter-spacing:1px;text-transform:uppercase;
+    border:1px solid var(--line);border-radius:30px;padding:8px 16px;transition:.18s;background:none;color:var(--text)}
+  .pill:hover{border-color:var(--violet);color:var(--glow)}
+  .burger{display:none;background:none;border:none;color:var(--text);font-size:22px}
+
+  /* breadcrumb */
+  .crumb{font-size:12px;letter-spacing:1px;text-transform:uppercase;color:var(--muted);
+    padding:22px 0 0}
+  .crumb a:hover{color:var(--text)}
+  .crumb span{color:var(--text)}
+
+  /* product */
+  .product{display:grid;grid-template-columns:1fr 1fr;gap:48px;padding:28px 0 20px}
+  @media(max-width:820px){.product{grid-template-columns:1fr;gap:30px}}
+
+  /* gallery */
+  .gallery .main{aspect-ratio:1/1;border-radius:14px;position:relative;overflow:hidden;
+    background:linear-gradient(150deg,#2b1a4a,#5a2d82)}
+  .gallery .main::after{content:"";position:absolute;inset:0;
+    background:radial-gradient(circle at 50% 40%,rgba(201,77,255,.25),transparent 60%),
+    linear-gradient(160deg,rgba(255,255,255,.05),rgba(0,0,0,.3))}
+  .gallery .badge{position:absolute;top:14px;left:14px;z-index:2;font-size:10px;font-weight:700;
+    letter-spacing:1px;text-transform:uppercase;background:rgba(0,0,0,.5);padding:5px 11px;border-radius:5px}
+  .thumbs{display:flex;gap:10px;margin-top:12px}
+  .thumbs div{width:74px;height:74px;border-radius:8px;border:1px solid var(--line);cursor:pointer;transition:.15s}
+  .thumbs div:hover{border-color:var(--violet)}
+  .t1{background:linear-gradient(150deg,#2b1a4a,#5a2d82)}
+  .t2{background:linear-gradient(150deg,#1a2b4a,#2d4a82)}
+  .t3{background:linear-gradient(150deg,#1a4a3a,#2d825a)}
+
+  /* details */
+  .eyebrow{font-size:12px;font-weight:700;letter-spacing:3px;text-transform:uppercase;
+    color:var(--violet);display:inline-block;margin-bottom:8px}
+  .ptitle{font-family:var(--display);font-size:clamp(30px,5vw,46px);text-transform:uppercase;
+    letter-spacing:.5px;line-height:.98}
+  .pprice{font-size:26px;font-weight:700;margin-top:14px}
+  .ptag{font-size:15px;color:var(--muted);margin-top:14px;line-height:1.6}
+
+  .opt-label{font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;
+    color:var(--muted);margin:24px 0 9px}
+  .editions{display:flex;gap:10px;flex-wrap:wrap}
+  .edition{flex:1;min-width:140px;text-align:left;background:#15151a;border:1px solid var(--line);
+    border-radius:9px;padding:13px 15px;transition:.15s}
+  .edition:hover{border-color:var(--violet)}
+  .edition.on{border-color:var(--violet);background:var(--violet-soft)}
+  .edition .en{font-size:14px;font-weight:700}
+  .edition .ep{font-size:13px;color:var(--muted);margin-top:3px}
+  .edition.on .ep{color:var(--glow)}
+
+  .addbtn{width:100%;margin-top:22px;background:var(--violet);color:#fff;border:none;
+    font-size:14px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;
+    padding:16px;border-radius:7px;transition:.15s}
+  .addbtn:hover{background:var(--glow);box-shadow:0 0 28px rgba(176,38,255,.45)}
+  .reassure{display:flex;gap:20px;flex-wrap:wrap;margin-top:16px;font-size:12.5px;color:var(--muted)}
+  .reassure b{color:var(--text)}
+
+  /* details block */
+  .details{margin-top:28px;border-top:1px solid var(--line);padding-top:22px}
+  .details h3{font-size:12px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;
+    color:var(--muted);margin-bottom:12px}
+  .details p{font-size:14.5px;line-height:1.7;color:var(--text);opacity:.9}
+  .spec{display:flex;gap:12px;font-size:13.5px;padding:8px 0;border-bottom:1px solid var(--line)}
+  .spec .k{width:130px;color:var(--muted);flex-shrink:0}
+  .spec .v{color:var(--text)}
+
+  /* recommended */
+  .reco{padding:56px 0 20px;border-top:1px solid var(--line);margin-top:44px}
+  .reco h2{font-family:var(--display);font-size:clamp(24px,4vw,38px);text-transform:uppercase;letter-spacing:1px}
+  .reco .sub{font-size:13px;color:var(--muted);margin:6px 0 26px}
+  .pgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+  @media(max-width:900px){.pgrid{grid-template-columns:repeat(2,1fr)}}
+  .card{background:var(--surface);border:1px solid var(--line);border-radius:10px;overflow:hidden;transition:.18s}
+  .card:hover{transform:translateY(-4px);border-color:var(--violet);box-shadow:0 14px 40px rgba(0,0,0,.5)}
+  .card .thumb{aspect-ratio:1/1;position:relative}
+  .card .thumb .sw{position:absolute;top:9px;left:9px;font-size:9px;font-weight:700;letter-spacing:.5px;
+    text-transform:uppercase;background:rgba(0,0,0,.55);padding:4px 8px;border-radius:4px;color:#fff}
+  .ableton{background:linear-gradient(145deg,#2b1a4a,#5a2d82)}
+  .serum{background:linear-gradient(145deg,#122a3a,#1e5a6e)}
+  .card .info{padding:12px 13px 15px}
+  .card .pname{font-size:13px;font-weight:500;line-height:1.35}
+  .card .cprice{font-size:13px;font-weight:700;color:var(--muted);margin-top:5px}
+
+  /* toast */
+  .toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(20px);
+    background:var(--surface2);border:1px solid var(--violet);color:var(--text);
+    padding:13px 22px;border-radius:8px;font-size:14px;box-shadow:0 10px 40px rgba(0,0,0,.6);
+    opacity:0;pointer-events:none;transition:.3s;z-index:80}
+  .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+  .toast b{color:var(--glow)}
+
+  footer{border-top:1px solid var(--line);padding:40px 0;background:var(--surface);margin-top:50px}
+  .foot-bottom{display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap}
+  .socials{display:flex;gap:16px}
+  .socials a{color:var(--muted);font-size:13px;font-weight:700;letter-spacing:1px;text-transform:uppercase}
+  .socials a:hover{color:var(--glow)}
+  .copy{font-size:12px;color:var(--muted)}
+
+  @media(max-width:680px){
+    .nav{grid-template-columns:auto 1fr auto}
+    .nav-links{display:none}
+    .burger{display:block}
+    .brand{text-align:left;font-size:26px}
+  }
+  @media(prefers-reduced-motion:reduce){*{scroll-behavior:auto;transition:none!important}}
+</style>
+</head>
+<body>
+
+<header>
+  <nav class="nav" aria-label="Primary">
+    <div class="nav-links">
+      <a href="merch.html">Shop Merch</a>
+      <a href="music.html" class="current">Shop Music</a>
+      <a href="tour.html">Tour</a>
+    </div>
+    <a href="index.html" class="brand">AHEE</a>
+    <div class="nav-actions">
+      <button class="pill" id="cartPill">Cart (0)</button>
+      <button class="burger" aria-label="Menu">☰</button>
+    </div>
+  </nav>
+</header>
+
+<div class="wrap">
+  <div class="crumb"><a href="index.html">Home</a> / <a href="music.html">Shop Music</a> / <span>Magic Ableton Racks Vol 6</span></div>
+
+  <!-- PRODUCT -->
+  <div class="product">
+    <div class="gallery">
+      <!-- Replace .main and thumb backgrounds with real product artwork -->
+      <div class="main"><span class="badge">Ableton</span></div>
+      <div class="thumbs">
+        <div class="t1"></div><div class="t2"></div><div class="t3"></div>
+      </div>
+    </div>
+
+    <div class="pdetails">
+      <span class="eyebrow">Magic Racks · Vol 6</span>
+      <h1 class="ptitle">Magic Ableton Racks Vol 6</h1>
+      <div class="pprice" id="price">$99.99</div>
+      <p class="ptag">30 production-ready racks and 300 macro presets — AHEE's signature bass chain, dialed in and mapped for instant tweaking.</p>
+
+      <div class="opt-label">Edition</div>
+      <div class="editions" id="editions">
+        <button class="edition" data-price="$77.77" data-name="Standard">
+          <div class="en">Standard</div><div class="ep">$77.77 · 30 racks + 300 presets</div>
+        </button>
+        <button class="edition on" data-price="$99.99" data-name="Deluxe">
+          <div class="en">Deluxe</div><div class="ep">$99.99 · + bonus content &amp; extras</div>
+        </button>
+      </div>
+
+      <button class="addbtn" id="addBtn">Add to cart — <span id="btnPrice">$99.99</span></button>
+      <div class="reassure">
+        <span><b>Instant</b> download</span>
+        <span><b>Lifetime</b> access &amp; re-downloads</span>
+        <span><b>Ableton Live</b> 10+</span>
+      </div>
+
+      <div class="details">
+        <h3>What's inside</h3>
+        <p>Drop-in Audio Effect and Instrument Racks built around AHEE's live and studio sound — each mapped to eight macros so you can reshape a patch fast without digging through devices. The Deluxe edition adds bonus racks, extra macro presets, and walkthrough notes.</p>
+        <div class="spec"><span class="k">Format</span><span class="v">Ableton Racks (.adg) + macro presets</span></div>
+        <div class="spec"><span class="k">Compatibility</span><span class="v">Ableton Live 10, 11, 12 (Standard/Suite)</span></div>
+        <div class="spec"><span class="k">Contents</span><span class="v">30 racks · 300 macro presets</span></div>
+        <div class="spec"><span class="k">Delivery</span><span class="v">Instant digital download</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- RECOMMENDED (real products, chosen by same software + series) -->
+  <section class="reco">
+    <h2>More from Magic Racks</h2>
+    <div class="sub">Same software, same series — the rest of the line.</div>
+    <div class="pgrid">
+      <a class="card" href="product.html"><div class="thumb ableton"><span class="sw">Ableton</span></div><div class="info"><div class="pname">Magic Ableton Racks Vol 5</div><div class="cprice">$79.99</div></div></a>
+      <a class="card" href="product.html"><div class="thumb ableton"><span class="sw">Ableton</span></div><div class="info"><div class="pname">Magic Racks Vol 3</div><div class="cprice">$20.00</div></div></a>
+      <a class="card" href="product.html"><div class="thumb ableton"><span class="sw">Ableton</span></div><div class="info"><div class="pname">Brain Tickler Templates</div><div class="cprice">$20.00</div></div></a>
+      <a class="card" href="product.html"><div class="thumb ableton"><span class="sw">Ableton</span></div><div class="info"><div class="pname">Magic Ableton Templates</div><div class="cprice">$15.00</div></div></a>
+    </div>
+  </section>
+</div>
+
+<footer>
+  <div class="wrap foot-bottom">
+    <div class="socials">
+      <a href="#">Instagram</a><a href="#">TikTok</a><a href="#">YouTube</a><a href="#">Spotify</a>
+    </div>
+    <div class="copy">© <span id="yr"></span> AHEE</div>
+  </div>
+</footer>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script>
+  var edition = 'Deluxe', priceStr = '$99.99';
+  var priceEl = document.getElementById('price');
+  var btnPriceEl = document.getElementById('btnPrice');
+  var toast = document.getElementById('toast');
+  var cart = 0, cartPill = document.getElementById('cartPill'), toastTimer = null;
+
+  document.getElementById('editions').addEventListener('click', function(e){
+    var b = e.target.closest('.edition'); if(!b) return;
+    this.querySelectorAll('.edition').forEach(function(x){x.classList.remove('on')});
+    b.classList.add('on');
+    edition = b.getAttribute('data-name');
+    priceStr = b.getAttribute('data-price');
+    priceEl.textContent = priceStr;
+    btnPriceEl.textContent = priceStr;
+  });
+
+  document.getElementById('addBtn').addEventListener('click', function(){
+    cart++;
+    cartPill.textContent = 'Cart ('+cart+')';
+    toast.innerHTML = 'Added <b>Magic Ableton Racks Vol 6 — '+edition+'</b>';
+    toast.classList.add('show');
+    if(toastTimer) clearTimeout(toastTimer);
+    toastTimer = setTimeout(function(){ toast.classList.remove('show'); }, 2400);
+  });
+
+  document.getElementById('yr').textContent = new Date().getFullYear();
+</script>
+</body>
+</html>
